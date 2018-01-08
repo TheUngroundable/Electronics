@@ -1,0 +1,58 @@
+body {
+	
+	background-image: url("../assets/bg.png");
+	background-size: 18%;
+	margin-bottom: 60px;
+}
+
+.bordered{
+
+	border: 2px;
+	border-style: dotted; 
+	border-color: #4c004c;
+	background-color: white;
+}
+
+.navbar{
+
+	border-color: lightblue;
+	background-color: #4c004c;
+}
+
+
+
+p {
+
+	font-size: 18px;
+	font-family: 'Arial';
+
+}
+
+.footer {
+  background-color: #330033;
+  height: 300px;
+ 
+}
+
+footer > .container > p{
+
+	color: white;
+	text-align: center;
+
+}
+
+.intro-section {
+    height: 100%;
+    padding-top: 150px;
+    text-align: center;
+}
+
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:center;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
