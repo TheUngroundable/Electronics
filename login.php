@@ -40,12 +40,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		/* lettura della tabella utenti */
 		$query="SELECT ID, Nome, Cognome FROM users WHERE Email='".$email."' and Password='".$passmd5."'";
-		$result=mysql_query($query)  or die ("problemino con la query");
+		$result=$conn->query($query)  or die ("problemino con la query");
         if($result){
-        	$count=mysql_num_rows($result);
+        	$count=$result->num_rows;
             if($count!=0){
         		session_start();
-                $row=mysql_fetch_array($result);
+                $row=$results->fetch_array();
                 $_SESSION['session'] = 1;
                 $_SESSION['ID'] = $row['ID'];
                 $_SESSION['email'] = $email;
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             	$dbErr="Identificazione non riuscita: nome utente o password errati ";
             }
         }else{
-        	$dbErr="Errore nel login: ".mysql_error();
+        	$dbErr="Errore nel login: ".$conn->error;
 			
 		}
 	}

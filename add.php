@@ -95,11 +95,11 @@
                     $sql ="INSERT INTO annunci (Titolo, Descrizione, Prezzo, DataInserimento, FKutente, FKsottocategoria)
                     VALUES ('".$Titolo."','".$Descrizione."','".$Prezzo."','".$Oggi."','".$_SESSION['ID']."','".$sottoCategoria."')";
 
-                    $result = mysql_query($sql) or die ("Errore con l' inserimento"); 
+                    $result = $conn->query($sql) or die ("Errore con l' inserimento"); 
 
                     if($result){
 
-                        $success ="Inserimento avvenuto con Successo!".mysql_fetch_assoc($result);
+                        $success ="Inserimento avvenuto con Successo!".$result->fetch_assoc();
                     
                     }
 
@@ -117,11 +117,11 @@
 
                     $image=basename( $_FILES["image"]["name"],".jpg"); // used to store the filename in a variable
 
-                    $insert_id = mysql_insert_id();
+                    $insert_id = $conn->insert_id();
 
                     //storind the data in your database
                     $query= "INSERT INTO pictures (FKannunci, image_path) VALUES (".$insert_id.",".$image.")";
-                    mysql_query($query);
+                    $conn->query($query);
 
                     echo $insert_id;
 

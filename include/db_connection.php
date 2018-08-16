@@ -1,8 +1,9 @@
 <?php
-$nomehost = "localhost"; 
-	$nomeuser = "root";
-	$dbpassword = "";
-	$dbname="electronics";
-	mysql_connect($nomehost,$nomeuser,$dbpassword) or die('Impossibile connettersi al server: ' . mysql_error());
-	mysql_select_db($dbname) or die ('Accesso al database non riuscito: ' . mysql_error());
-	?>
+    $conn = mysqli_connect("localhost","root","","electronics");
+    // Check connection
+    if (mysqli_connect_errno())
+      {
+      echo "Failed to connect to MySQL: " . mysqli_connect_error();
+      }
+
+?>

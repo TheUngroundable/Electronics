@@ -143,7 +143,7 @@
                             <?php
                                $sql = "SELECT macrocategory.ID, macrocategory.Nome FROM macrocategory";
                                
-                               $results = mysql_query($sql);
+                               $results = $conn->query($sql);
                                
                                ?>
 
@@ -151,7 +151,7 @@
 
                             <?php
 
-                               while($row = mysql_fetch_array($results)){
+                               while($row = $results->fetch_array()){
                                
                                  echo "<option value='".$row['ID']."'>".$row['Nome']."</option>";
                                
@@ -205,9 +205,9 @@
 
                             $sql = "SELECT annunci.Titolo, annunci.Descrizione, annunci.Prezzo, annunci.DataInserimento, sottocategory.Nome as sottocategoria, macrocategory.Nome as categoria FROM annunci, users, sottocategory, macrocategory WHERE FKutente = users.ID AND FKsottocategoria = sottocategory.ID AND sottocategory.FKcategory = macrocategory.ID";
 
-                            $result = mysql_query($sql);
+                            $result = $conn->query($sql);
 
-                            while($row = mysql_fetch_array($result)){
+                            while($row = $result->fetch_assoc()){
 
                            
 

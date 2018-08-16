@@ -118,8 +118,8 @@
 
 
                     $sql ="SELECT Sesso From users where ID = ".$_SESSION['ID'];
-                    $result = mysql_query($sql);
-                    $result = mysql_fetch_assoc($result);
+                    $result = $conn->query($sql);
+                    $result = $result->fetch_assoc();
 
                     if($result['Sesso'] == 'M'){
 
@@ -152,9 +152,9 @@
                         <?php
 
                         $sql = "SELECT annunci.ID, annunci.Titolo, annunci.Descrizione, annunci.Prezzo, annunci.DataInserimento, sottocategory.Nome as sottocategoria, macrocategory.Nome as categoria FROM annunci, users, sottocategory, macrocategory WHERE FKutente = users.ID AND FKsottocategoria = sottocategory.ID AND sottocategory.FKcategory = macrocategory.ID AND users.Email = '".$_SESSION['email']."'";
-                        $result = mysql_query($sql) or die ("problemino con la query");
+                        $result = $conn->query($sql) or die ("problemino con la query");
                         
-                        if(mysql_num_rows($result)!=0){
+                        if($result->num_rows!=0){
 
                         ?>
 
@@ -174,7 +174,7 @@
                         <?php
 
                         
-                                while($row = mysql_fetch_array($result)){
+                                while($row = $result->fetch_array()){
 
                                    echo"<tr><td><a href='annuncio.php?ID=".$row['ID']."'>".$row['Titolo']."</a></td><td>".$row['Prezzo']."</td><td>".$row['DataInserimento']." </td><td>".$row['categoria']."</td><td><a href='edit_ad.php?id=".$row['ID']."'>Modifica</a></td></tr>";
 
@@ -201,9 +201,9 @@
                         <?php
 
                         $sql = "SELECT annunci.ID, annunci.Titolo, annunci.Descrizione, annunci.Prezzo, annunci.DataInserimento, sottocategory.Nome as sottocategoria, macrocategory.Nome as categoria FROM annunci, users, sottocategory, macrocategory, likes WHERE FKsottocategoria = sottocategory.ID AND sottocategory.FKcategory = macrocategory.ID AND likes.FKutente = users.ID AND likes.FKannuncio = annunci.ID AND users.Email = '".$_SESSION['email']."'";
-                        $result = mysql_query($sql) or die ("problemino con la query");
+                        $result = $conn->query($sql) or die ("problemino con la query");
                         
-                        if(mysql_num_rows($result)!=0){
+                        if($result->num_rows!=0){
 
                         ?>
 
@@ -223,7 +223,7 @@
                         
                         <?php
 
-                                while($row = mysql_fetch_array($result)){
+                                while($row = $result->fetch_array()){
 
                                    echo" <tr><td><a href='annuncio.php?ID=".$row['ID']."'>".$row['Titolo']."</a></td> <td>".$row['Prezzo']."</td><td>".$row['DataInserimento']." </td><td>".$row['categoria']."</td><td>".$row['sottocategoria']."</td></tr>";
 

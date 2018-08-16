@@ -42,9 +42,9 @@
          
              $sql="SELECT * from likes where FKutente = ".$_SESSION['ID']." AND FKannuncio = ".$_GET['ID'];
          
-             $result = mysql_query($sql);
+             $result = $conn->($sql);
          
-             if(mysql_num_rows($result)){
+             if($result->num_rows()){
          
                  $liked = 1;
          
@@ -59,10 +59,10 @@
          
              $sql = "SELECT annunci.Titolo, annunci.Descrizione, annunci.Prezzo, annunci.DataInserimento, users.Email, citta.Nome as Citta, region.Nome as Regione, sottocategory.Nome as Sottocategoria, macrocategory.Nome as Categoria from annunci, users, citta, region, sottocategory, macrocategory WHERE users.FKCity = citta.ID AND citta.FKregion = Region.ID AND annunci.FKutente = users.ID AND annunci.FKsottocategoria = sottocategory.ID AND sottocategory.FKcategory = macrocategory.ID AND annunci.ID = ".$_GET['ID'];
          
-             $query = mysql_query($sql);
-             $result = mysql_fetch_array($query);
+             $query = $conn->query($sql);
+             $result = $query->fetch_array();
          
-             if (mysql_num_rows($query)==0) {
+             if ($query->num_rows==0) {
          
                  header("Location: index.php");
          

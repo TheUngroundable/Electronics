@@ -7,13 +7,7 @@ $err=false;
 //verifico se post già inviata
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//connessione al db
-	$nomehost = "localhost"; 
-	$nomeuser = "root";
-	$dbpassword = "";
-	$dbname="electronics";
-	$tab="users";
-	mysql_connect($nomehost,$nomeuser,$dbpassword) or die('Impossibile connettersi al server: ' . mysql_error());
-	mysql_select_db($dbname) or die ('Accesso al database non riuscito: ' . mysql_error());
+	include_once("include/db_connection.php");
 
 
 	//recupero dati post ed effettuo protezione da caratteri speciali
@@ -79,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		//query inserimento nuovo utente
 		$query="INSERT INTO $tab (Nome,Cognome,Email,Password) VALUES ('$nome','$cognome','$email','$passmd5')";
-		$result=mysql_query($query);
+		$result=$conn->query($query);
 		if($result){
 			//se la registrazione è andara a buon fine, l'utente è automaticamente loggato
 			session_start();
@@ -90,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			header("Location: index.php");	//ridirigo utente ad home page
 			exit;
 		}else{
-        	$dbErr="Errore nell'inserimento: ".mysql_error();
+        	$dbErr="Errore nell'inserimento: ".$conn->error();
 			
 		}
 

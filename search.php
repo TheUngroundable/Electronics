@@ -74,8 +74,8 @@
                 }
                 
                     $sql .= " order by annunci.DataInserimento";
-                    $result = mysql_query($sql) or die (mysql_error());
-                    $count = mysql_num_rows($result);
+                    $result = $conn->query($sql) or die ($conn->error);
+                    $count = $result->num_rows;
 
                     
 
@@ -85,7 +85,7 @@
                         $search_output = "<hr />$count results for <strong>$searchquery</strong><hr />";
                         
                         $i = 0;
-                        while($row =mysql_fetch_array($result)){
+                        while($row = $result->fetch_array()){
 
                             $search_result[$i]['ID'] = $row['ID'];
                             $search_result[$i]['Titolo'] = $row['Titolo'];
